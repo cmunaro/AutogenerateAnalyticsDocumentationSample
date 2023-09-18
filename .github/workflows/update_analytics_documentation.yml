@@ -1,0 +1,26 @@
+name: Update analytics documentation
+
+on:
+  push:
+    branches: ["master"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update_analytics_documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create analytics documentation
+        run: ./gradlew clean :docGenerator:run --args $(pwd)
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "docs: Update analytics documentation"
+          branch: "docs/autoUpdateAnalytics"
+          title: "docs: Update analytics documentation"
+          body: ""
+          delete-branch: true
