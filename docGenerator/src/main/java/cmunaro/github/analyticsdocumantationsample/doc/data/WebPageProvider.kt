@@ -78,7 +78,7 @@ internal class WebPageProviderImpl(
                                     .forEach { parameter ->
                                         dl {
                                             dt {
-                                                +parameter.parameterName
+                                                +"${parameter.parameterName}: ${parameter.typeName}"
                                             }
                                             dd { +parameter.description }
                                         }
