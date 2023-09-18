@@ -30,7 +30,9 @@ internal interface WebPageProvider {
 internal class WebPageProviderImpl(
     private val webPageStyleDataSource: WebPageStyleDataSource = WebPageStyleDataSourceImpl()
 ) : WebPageProvider {
-    override fun createEventDocumentationPage(events: List<EventRepresentation>): String {
+    override fun createEventDocumentationPage(
+        events: List<EventRepresentation>
+    ): String {
         return createHTML().html {
             pageHead()
             pageBody(events)

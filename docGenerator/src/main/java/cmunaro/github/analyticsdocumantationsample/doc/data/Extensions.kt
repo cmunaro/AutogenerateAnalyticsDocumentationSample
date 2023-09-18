@@ -41,10 +41,7 @@ fun getValueFor(kParameter: KParameter): Any? {
         else -> {
             val clazz = kParameter.type.javaType as Class<*>
             when {
-                clazz.isEnum -> {
-                    val enumClass = clazz.enumConstants.first()::class.java
-                    enumClass.enumConstants.first()
-                }
+                clazz.isEnum -> clazz.enumConstants.first()
 
                 else -> runCatching { clazz.kotlin.generateDummyInstance() }
                     .onFailure { throw Exception("Unhandled default type for $kParameter") }
