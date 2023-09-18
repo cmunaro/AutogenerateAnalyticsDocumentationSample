@@ -5,8 +5,11 @@ import cmunaro.github.analyticsdocumantationsample.doc.domain.DocGeneratorImpl
 import cmunaro.github.analyticsdocumantationsample.doc.domain.EventSpider
 import cmunaro.github.analyticsdocumantationsample.doc.domain.EventSpiderImpl
 
+private const val DEFAULT_PROJECT_ROOT = "."
+
 suspend fun main(args: Array<String>) {
-    val eventSpider: EventSpider = EventSpiderImpl()
+    val projectRoot = args.firstOrNull() ?: DEFAULT_PROJECT_ROOT
+    val eventSpider: EventSpider = EventSpiderImpl(projectRoot = projectRoot)
     val docGenerator: DocGenerator = DocGeneratorImpl()
 
     println("🔎 Finding events..")

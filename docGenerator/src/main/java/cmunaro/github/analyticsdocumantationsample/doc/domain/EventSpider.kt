@@ -23,16 +23,17 @@ interface EventSpider {
 }
 
 internal class EventSpiderImpl(
+    projectRoot: String,
     dispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val projectFilesDataSource: ProjectFilesDataSource = ProjectFilesDataSourceImpl(),
     private val instanceFinder: InstancesFinder = InstancesFinderImpl(dispatcher)
 ): EventSpider {
     private val scope = CoroutineScope(dispatcher)
     private val kotlinFiles: List<File> by lazy {
-        projectFilesDataSource.getKotlinFiles()
+        projectFilesDataSource.getKotlinFiles(root = projectRoot)
     }
     private val swiftFiles: List<File> by lazy {
-        projectFilesDataSource.getSwiftFiles()
+        projectFilesDataSource.getSwiftFiles(root = projectRoot)
     }
 
     override suspend fun findEvents(): List<EventRepresentation> = AnalyticsEvent::class

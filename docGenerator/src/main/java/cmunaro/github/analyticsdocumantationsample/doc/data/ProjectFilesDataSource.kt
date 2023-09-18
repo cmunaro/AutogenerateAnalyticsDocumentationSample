@@ -3,20 +3,20 @@ package cmunaro.github.analyticsdocumantationsample.doc.data
 import java.io.File
 
 interface ProjectFilesDataSource {
-    fun getKotlinFiles(): List<File>
-    fun getSwiftFiles(): List<File>
+    fun getKotlinFiles(root: String): List<File>
+    fun getSwiftFiles(root: String): List<File>
 }
 
 class ProjectFilesDataSourceImpl : ProjectFilesDataSource {
 
-    override fun getKotlinFiles(): List<File> =
-        getFiles(upperDirectory = "androidApp", extension = "kt")
+    override fun getKotlinFiles(root: String): List<File> =
+        getFiles(root = root, upperDirectory = "androidApp", extension = "kt")
 
-    override fun getSwiftFiles(): List<File> =
-        getFiles(upperDirectory = "iosApp", extension = "swift")
+    override fun getSwiftFiles(root: String): List<File> =
+        getFiles(root = root, upperDirectory = "iosApp", extension = "swift")
 
-    private fun getFiles(upperDirectory: String, extension: String): List<File> =
-        File(".").walk()
+    private fun getFiles(root: String, upperDirectory: String, extension: String): List<File> =
+        File(root).walk()
             .first { it.isDirectory && it.name == upperDirectory }
             .walk()
             .filter { it.name.endsWith(".$extension") }
