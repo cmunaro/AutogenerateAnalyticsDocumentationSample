@@ -11,3 +11,8 @@ data class BalanceIncreasedEvent(
 data class BalanceDecreasedEvent(
     @Description("Amount of money removed from the account") val delta: Double
 ) : AnalyticsEvent(name = "balance_decreased")
+
+@Description("A dummy event")
+data class DummyEvent(
+    @Description("Amount of money removed from the account") val delta: Double
+) : AnalyticsEvent(name = "balance_decreased")
