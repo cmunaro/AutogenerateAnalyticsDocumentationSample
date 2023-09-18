@@ -3,12 +3,16 @@ package cmunaro.github.analyticsdocumantationsample.doc.data
 import java.io.File
 
 internal interface WebPageSaver {
-    fun savePageToFile(webPage: String): File
+    fun savePageToDocsFile(projectRoot: String, webPage: String): File
 }
 
 internal class WebPageSaverImpl: WebPageSaver {
-    override fun savePageToFile(webPage: String): File {
-        val webPageFile = File("index.html")
+    override fun savePageToDocsFile(projectRoot: String, webPage: String): File {
+        val docsDirectory = File("$projectRoot/docs/")
+        if (!docsDirectory.exists()) {
+            docsDirectory.mkdirs()
+        }
+        val webPageFile = File("${docsDirectory.absoluteFile}/index.html")
         webPageFile.writeText(webPage)
         return webPageFile.absoluteFile
     }

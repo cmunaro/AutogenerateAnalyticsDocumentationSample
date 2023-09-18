@@ -17,11 +17,6 @@ suspend fun main(args: Array<String>) {
     println("✅ Found ${events.size} events")
 
     println("✏️ Generating Doc..")
-    val webPage = docGenerator.generateDocToFile(events)
-    println(
-        """
-        |🚀 Doc generated!
-        |📄 WebPage: ${webPage.absoluteFile}
-        """.trimMargin()
-    )
+    docGenerator.generateDocToFile(projectRoot = projectRoot, events = events)
+    println("🚀 Doc generated!")
 }
