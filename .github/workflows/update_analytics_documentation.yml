@@ -2,7 +2,7 @@ name: Update analytics documentation
 
 on:
   push:
-    branches: ["master"]
+    branches: ["develop"]
 
 permissions:
   contents: write
