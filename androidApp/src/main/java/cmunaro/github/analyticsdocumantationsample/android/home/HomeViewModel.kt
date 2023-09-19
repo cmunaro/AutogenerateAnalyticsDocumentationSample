@@ -7,6 +7,7 @@ import cmunaro.github.analyticsdocumantationsample.android.utils.Async
 import cmunaro.github.analyticsdocumantationsample.bank.domain.BankRepository
 import cmunaro.github.analyticsdocumantationsample.events.BalanceDecreasedEvent
 import cmunaro.github.analyticsdocumantationsample.events.BalanceIncreasedEvent
+import cmunaro.github.analyticsdocumantationsample.events.Evviva
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -36,6 +37,7 @@ class HomeViewModel(
             bankRepository.subtractMoney(1000.0)
         }.onSuccess {
             analyticsRepository.log(BalanceDecreasedEvent(delta = 1000.0))
+            analyticsRepository.log(Evviva(ciao = 123.123))
         }
     }
 }
